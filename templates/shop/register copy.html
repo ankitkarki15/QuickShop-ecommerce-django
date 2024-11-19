@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6">
+        <form class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg" method="POST">
+            {% csrf_token %}
+            <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
+            <hr class="mb-4">
+            
+            <!-- Flash Messages -->
+            {% if messages %}
+                <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4" role="alert">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- First Name -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium" for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" 
+                       class="w-full px-4 py-2 border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                       placeholder="Enter your first name" value="{{ form.first_name.value|default:'' }}" required>
+                <small class="text-red-500">{{ form.first_name.errors }}</small>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium" for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" 
+                       class="w-full px-4 py-2 border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                       placeholder="Enter your last name" value="{{ form.last_name.value|default:'' }}" required>
+                <small class="text-red-500">{{ form.last_name.errors }}</small>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium" for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" 
+                       class="w-full px-4 py-2 border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                       placeholder="Enter your 10-digit phone number" maxlength="10" pattern="\d{10}" 
+                       value="{{ form.phone_number.value|default:'' }}" required>
+                <small class="text-red-500">{{ form.phone_number.errors }}</small>
+            </div>
+            
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium" for="password1">Password</label>
+                <input type="password" id="password1" name="password1" 
+                       class="w-full px-4 py-2 border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                       placeholder="Enter your password" required>
+                <small class="text-red-500">{{ form.password1.errors }}</small>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium" for="password2">Confirm Password</label>
+                <input type="password" id="password2" name="password2" 
+                       class="w-full px-4 py-2 border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                       placeholder="Confirm your password" required>
+                <small class="text-red-500">{{ form.password2.errors }}</small>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Register</button>
+            
+            <!-- Additional Links -->
+            <p class="mt-4 text-sm text-center">Already have an account? <a href="/login" class="text-blue-500 hover:underline">Login</a></p>
+            <p class="mt-4 text-sm text-center">Go to <a href="/" class="text-blue-500 hover:underline">Home</a></p>
+        </form>
+    </div>
+</body>
+</html>

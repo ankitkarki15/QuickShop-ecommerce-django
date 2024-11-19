@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -10,19 +10,19 @@ from .forms import RegistrationForm
 def home_page(request):
     return render(request, 'shop/index.html') 
 
-# view function for the register page
+
 def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the user to the database
-            messages.success(request, 'Registration successful! You can now log in.')
-            return redirect('login') 
+            form.save()
+            messages.success(request, "Registration successful! You can now log in.")  # Add success message
+            return redirect('login')  # Ensure 'login' is the correct name in your URLs
         else:
-            messages.error(request, 'Registration failed. Please check the form.')
+            messages.error(request, "Please correct the errors below.")  # Optional: Add error message
     else:
         form = RegistrationForm()
-
+    
     return render(request, 'shop/register.html', {'form': form})
 
 
@@ -31,12 +31,12 @@ def login_page(request):
         phone_number = request.POST['phone_number']
         password = request.POST['password']
 
-        # Authenticate user using phone number and password
+        
         user = authenticate(request, phone_number=phone_number, password=password)
         
         if user is not None:
             login(request, user)
-            return redirect('dashboard')  # Redirect to the dashboard or homepage
+            return redirect('dashboard')  
         else:
             messages.error(request, 'Invalid login credentials. Please try again.')
 

@@ -11,7 +11,7 @@ class User(AbstractUser):
 
     # String representation of the User object (by default, username is returned)
     def __str__(self):
-        return self.username  
+        return self.email  
     
     
 class Product(models.Model):

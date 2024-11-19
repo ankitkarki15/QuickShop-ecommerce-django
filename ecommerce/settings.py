@@ -25,9 +25,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'shop',
+ 
 ]
+EXTERNAL_APPS=[
+    'shop',
+    
+]
+
+# INSTALLED APPS = INSTALLED APPS + EXTERNAL APPS
+INSTALLED_APPS += EXTERNAL_APPS
+
 # Set the custom user model
 AUTH_USER_MODEL = 'shop.User'
 
